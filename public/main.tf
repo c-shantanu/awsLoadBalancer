@@ -2,6 +2,11 @@ provider "aws" {
   region = var.region
 }
 
+provider "vault" {
+  address = var.vault_address
+  token   = var.vault_token
+}
+
 resource "aws_lb" "this" {
   name               = var.name
   internal           = false
@@ -42,4 +47,14 @@ resource "aws_lb_listener" "this" {
     type             = "forward"
     target_group_arn = aws_lb_target_group.this.arn
   }
+}
+
+resource "vault_generic_secret" "alb_credentials" {
+  path = "secret/data/aws/alb"
+
+  data_json = jsonencode({
+    "alb_arn"      = aws_lb.this.arn,
+    "alb_dns_name" = aws_lb.this.dns_name,
+    "alb_zone_id"  = aws_lb.this.zone_id
+  })
 }
