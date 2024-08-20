@@ -15,3 +15,6 @@ vpc_id                 = "vpc-095809ea17cb4369c"
 target_type            = "instance"
 listener_port          = 80
 listener_protocol      = "HTTP"
+
+vault_address = "http://34.239.48.43:8200"
+vault_token   = "vault_token"
