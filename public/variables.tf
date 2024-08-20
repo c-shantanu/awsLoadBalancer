@@ -104,3 +104,13 @@ variable "listener_protocol" {
   type        = string
   default     = "HTTP"
 }
+
+variable "vault_address" {
+  description = "The address of the Vault server"
+  type        = string
+}
+
+variable "vault_token" {
+  description = "The Vault token for authentication"
+  type        = string
+}
